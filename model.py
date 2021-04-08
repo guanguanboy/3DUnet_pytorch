@@ -71,25 +71,25 @@ class D3UNet(nn.Module):
 
     def forward(self, x):
         x0 = self.contract1(x)
-        print('x0.shape:', x0.shape)
+        #print('x0.shape:', x0.shape)
 
         x1 = self.max_pooling3d(x0)
-        print('x1.shape:', x1.shape)
+        #print('x1.shape:', x1.shape)
 
         x2 = self.contract2(x1)
-        print('x2.shape:', x2.shape)
+        #print('x2.shape:', x2.shape)
         
         x3 = self.upsample(x2)
-        print('x3.shape:', x3.shape)
+        #print('x3.shape:', x3.shape)
         #这里需要concatnate
         x4 = torch.cat([x3, x0], axis=1)
-        print('x4.shape:', x4.shape)
+        #print('x4.shape:', x4.shape)
         
         x5 = self.expand1(x4)
-        print('x5.shape:', x5.shape)
+        #print('x5.shape:', x5.shape)
 
         x6 = self.expand2(x5)
-        print('x6.shape:', x6.shape)
+        #print('x6.shape:', x6.shape)
 
         return x6
 
