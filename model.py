@@ -138,15 +138,17 @@ class Discriminator(nn.Module):
     '''
     def __init__(self, input_channels, output_channels):
         super(Discriminator, self).__init__()
-        self.upfeature = FeatureMap3DBlock(input_channels, hidden_channels)
-        self.contract1 = ContractingBlock(input_channels, 32, 64, use_maxpooling=True)
+        self.upfeature = FeatureMap3DBlock(input_channels, 16)
+        self.contract1 = ContractingBlock(16, 32, 64, use_maxpooling=True)
         self.contract2 = ContractingBlock(64, 64, 128, use_maxpooling=False)
-
+        self.final = nn.Conv3d(128, 1, kernel_size=1) #使用1x1卷积将通道数变换为1
+        
     def forward(self, x, y): #x为condition, y为label，或者是generator生成的图像
 
         x = torch.cat([x, y], axis=1) #在通道维进行连接
         x = self.upfeature(x) #变换通道数，然后再进一步处理
         x0 = self.contract1(x)
         x1 = self.contract2(x0)
+        x2 = self.final(x1)
 
-        return x1
+        return x2

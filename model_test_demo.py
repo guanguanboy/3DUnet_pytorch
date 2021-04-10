@@ -16,14 +16,17 @@ print(x.shape)
 #print(model)
 
 
-discriminator_input = torch.randn(1, 3, 16, 160, 160)
-discriminator_input = discriminator_input.to(DEVICE)
+discriminator_input_label = torch.randn(1, 3, 16, 160, 160)
 
-disc_model = Discriminator(3, 10)
+#discriminator_input = discriminator_input.to(DEVICE)
 
-disc_model = disc_model.to(DEVICE)
+discriminator_input_condition = torch.randn(1, 4, 16, 160, 160)
 
-disc_output = disc_model(discriminator_input)
+disc_model = Discriminator(7, 1)
 
-print('disc_output.shape=',disc_output.shape) #disc_output.shape= torch.Size([1, 128, 16, 160, 160])
+#disc_model = disc_model.to(DEVICE)
+
+disc_output = disc_model(discriminator_input_condition, discriminator_input_label)
+
+print('disc_output.shape=',disc_output.shape) #disc_output.shape= torch.Size([1, 1, 16, 160, 160])
 
