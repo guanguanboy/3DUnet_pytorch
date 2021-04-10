@@ -33,7 +33,7 @@ train_dataset = brtdataset.VolumeDataSet(config["train"], base_dir + "train/", d
 
 steps_per_epoch = 20
 n_epochs=10
-batch_size = 1
+batch_size = 2
 lr = 0.00001
 device = DEVICE
 display_step = 2
@@ -147,9 +147,9 @@ def train(save_model=False):
                 else:
                     print("Pretrained initial state")
 
-            
+                mean_generator_loss = 0
+                mean_discriminator_loss = 0
 
-                
             #step ++,每一次循环，每一个batch的处理，叫做一个step
             cur_step += 1
 
