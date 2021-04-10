@@ -27,7 +27,7 @@ disc_model = Discriminator(7, 1)
 
 disc_model = disc_model.to(DEVICE)
 
-disc_output = disc_model(discriminator_input_condition, discriminator_input_label)
+disc_output = disc_model(discriminator_input_label,discriminator_input_condition)
 
 print('disc_output.shape=',disc_output.shape) #disc_output.shape= torch.Size([1, 1, 16, 160, 160])
 

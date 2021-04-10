@@ -143,7 +143,7 @@ class Discriminator(nn.Module):
         self.contract2 = ContractingBlock(64, 64, 128, use_maxpooling=False)
         self.final = nn.Conv3d(128, 1, kernel_size=1) #使用1x1卷积将通道数变换为1
         
-    def forward(self, x, y): #x为condition, y为label，或者是generator生成的图像
+    def forward(self, x, y): #x为label或fake, y为condition
 
         x = torch.cat([x, y], axis=1) #在通道维进行连接
         x = self.upfeature(x) #变换通道数，然后再进一步处理
