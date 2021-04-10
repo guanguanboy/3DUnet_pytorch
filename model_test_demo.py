@@ -18,13 +18,14 @@ print(x.shape)
 
 discriminator_input_label = torch.randn(1, 3, 16, 160, 160)
 
-#discriminator_input = discriminator_input.to(DEVICE)
+discriminator_input_label = discriminator_input_label.to(DEVICE)
 
 discriminator_input_condition = torch.randn(1, 4, 16, 160, 160)
+discriminator_input_condition = discriminator_input_condition.to(DEVICE)
 
 disc_model = Discriminator(7, 1)
 
-#disc_model = disc_model.to(DEVICE)
+disc_model = disc_model.to(DEVICE)
 
 disc_output = disc_model(discriminator_input_condition, discriminator_input_label)
 
